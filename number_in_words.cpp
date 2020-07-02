@@ -224,7 +224,8 @@ string _4digits(int num)
                 break;
         case 9: words += " Nine";
                 break;
-        default: if(!pass5) { goto skipthousand; }
+        default: if(!pass5)
+                { goto skipthousand; }
     }
     words += " Thousand";
     if(num != 1)
