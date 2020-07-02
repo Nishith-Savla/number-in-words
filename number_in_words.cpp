@@ -237,7 +237,6 @@ string _4digits(int num)
 
 string _5digits(long int num)
 {
-    cout << "Hello " << num;
     string words = "";
     int thousands = num % 10000;
     num /= 1000;
@@ -274,6 +273,7 @@ string _5digits(long int num)
                 pass5 = true;
                 break;
         default: num /= 10;
+                cout << "Hello 1" << endl;
     }
     switch (num)
     {
@@ -302,6 +302,7 @@ string _5digits(long int num)
                 pass5 = true;
                 break;
         default: thousands %= 1000;
+                cout << "Hello 2" << endl;
     }
     words += _4digits(thousands); // For the number at thousands place
     return words;
