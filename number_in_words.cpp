@@ -19,10 +19,11 @@ string _9digits(long int);
 
 // Global declaration of boolean variables to see that if a function is executed or not, excluding default cases
 bool hasPassedFunc5digits = false, hasPassedFunc6digits = false, hasPassedFunc7digits = false, hasPassedFunc9digits = false;
-short int try_again = 0;
+short int error = 0;
 int main()
 {
     long int num;
+    char try_again;
     string words = ""; // Target string
     cout << "Enter a number: ";
     cin>> num;
@@ -34,6 +35,10 @@ int main()
     words += to_words(num); // Function call
     if(words != "") // Error handling for empty strings
     cout << num << " in words is:" << words << endl;
+    cout << "Do you want to try again (y/n): " << endl;
+    cin >> try_again;
+    if(try_again == 'y' || try_again == 'Y')
+        main();
     return 0;
 }
 
@@ -64,11 +69,11 @@ string to_words(long int num)
         case 9: words += _9digits(num); // If input consists 9 digits
                 break;
         default: cout << "The number is too big :( \n";
-                if(try_again < 10)
+                if(error < 10)
                 {
                     cout << "Try again...\n\n";
                     main();
-                    try_again++;
+                    error++;
                 }
     }
     return words;
