@@ -1,4 +1,4 @@
-// Program to convert number to words @C++
+// Program to convert number to words
 // Author: Nishith
 
 #include <iostream>
@@ -17,9 +17,8 @@ string _7digits(long int);
 string _8digits(long int);
 string _9digits(long int);
 
-// Global declaration of boolean variables to see that if a function is executed or not
-bool pass5 = false, pass7 = false, pass9 = false;
-bool isnegative = false;
+// Global declaration of boolean variables to see that if a function is executed or not, excluding default cases
+bool hasPassedFunc5digits = false, hasPassedFunc6digits = false, hasPassedFunc7digits = false, hasPassedFunc9digits = false;
 short int try_again = 0;
 int main()
 {
@@ -29,14 +28,12 @@ int main()
     cin>> num;
     if(num < 0)
     {
-        isnegative = true;
         num = abs(num);
         words += " -";
     }
     words += to_words(num); // Function call
-    if(words != "") // Error handling
-    cout << num << " in words is:" << words << endl; // Output printing
-    main();
+    if(words != "") // Error handling for empty strings
+    cout << num << " in words is:" << words << endl;
     return 0;
 }
 
@@ -224,7 +221,7 @@ string _4digits(int num)
                 break;
         case 9: words += " Nine";
                 break;
-        default: if(!pass5)
+        default: if(!hasPassedFunc5digits || (hasPassedFunc6digits && !hasPassedFunc5digits))
                 { goto skipthousand; }
     }
     words += " Thousand";
@@ -243,62 +240,62 @@ string _5digits(long int num)
     switch (num)
     {
         case 10: words += " Ten";
-                pass5 = true;
+                hasPassedFunc5digits = true;
                 break;
         case 11: words += " Eleven";
-                pass5 = true;
+                hasPassedFunc5digits = true;
                 break;
         case 12: words += " Twelve";
-                pass5 = true;
+                hasPassedFunc5digits = true;
                 break;
         case 13: words += " Thirteen";
-                pass5 = true;
+                hasPassedFunc5digits = true;
                 break;
         case 14: words += " Fourteen";
-                pass5 = true;
+                hasPassedFunc5digits = true;
                 break;
         case 15: words += " Fifteen";
-                pass5 = true;
+                hasPassedFunc5digits = true;
                 break;
         case 16: words += " Sixteen";
-                pass5 = true;
+                hasPassedFunc5digits = true;
                 break;
         case 17: words += " Seventeen";
-                pass5 = true;
+                hasPassedFunc5digits = true;
                 break;
         case 18: words += " Eighteen";
-                pass5 = true;
+                hasPassedFunc5digits = true;
                 break;
         case 19: words += " Nineteen";
-                pass5 = true;
+                hasPassedFunc5digits = true;
                 break;
         default: num /= 10;
     }
     switch (num)
     {
         case 2: words += " Twenty";
-                pass5 = true;
+                hasPassedFunc5digits = true;
                 break;
         case 3: words += " Thirty";
-                pass5 = true;
+                hasPassedFunc5digits = true;
                 break;
         case 4: words += " Forty";
-                pass5 = true;
+                hasPassedFunc5digits = true;
                 break;
         case 5: words += " Fifty";
-                pass5 = true;
+                hasPassedFunc5digits = true;
                 break;
         case 6: words += " Sixty";
-                pass5 = true;
+                hasPassedFunc5digits = true;
                 break;
         case 7: words += " Seventy";
-                pass5 = true;
+                hasPassedFunc5digits = true;
                 break;
         case 8: words += " Eighty";
-                pass5 = true;
+                hasPassedFunc5digits = true;
                 break;
         case 9: words += " Ninety";
-                pass5 = true;
+                hasPassedFunc5digits = true;
                 break;
         default: thousands %= 1000;
     }
@@ -314,24 +311,34 @@ string _6digits(long int num)
     switch (num)
     {
         case 1: words += " One";
+                hasPassedFunc6digits = true;
                 break;
         case 2: words += " Two";
+                hasPassedFunc6digits = true;
                 break;
         case 3: words += " Three";
+                hasPassedFunc6digits = true;
                 break;
         case 4: words += " Four";
+                hasPassedFunc6digits = true;
                 break;
         case 5: words += " Five";
+                hasPassedFunc6digits = true;
                 break;
         case 6: words += " Six";
+                hasPassedFunc6digits = true;
                 break;
         case 7: words += " Seven";
+                hasPassedFunc6digits = true;
                 break;
         case 8: words += " Eight";
+                hasPassedFunc6digits = true;
                 break;
         case 9: words += " Nine";
+                hasPassedFunc6digits = true;
                 break;
-        default: if(!pass7) { goto skiplakh; }
+        default: if(!hasPassedFunc7digits)
+                { goto skiplakh; }
     }
     words += " Lakh";
     if(num != 1 )
@@ -349,48 +356,64 @@ string _7digits(long int num)
     switch (num)
     {
         case 10: words += " Ten";
+                hasPassedFunc7digits = true;
                 break;
         case 11: words += " Eleven";
+                hasPassedFunc7digits = true;
                 break;
         case 12: words += " Twelve";
+                hasPassedFunc7digits = true;
                 break;
         case 13: words += " Thirteen";
+                hasPassedFunc7digits = true;
                 break;
         case 14: words += " Fourteen";
+                hasPassedFunc7digits = true;
                 break;
         case 15: words += " Fifteen";
+                hasPassedFunc7digits = true;
                 break;
         case 16: words += " Sixteen";
+                hasPassedFunc7digits = true;
                 break;
         case 17: words += " Seventeen";
+                hasPassedFunc7digits = true;
                 break;
         case 18: words += " Eighteen";
+                hasPassedFunc7digits = true;
                 break;
         case 19: words += " Nineteen";
+                hasPassedFunc7digits = true;
                 break;
         default: num /= 10;
-                pass7 = true;
     }
     switch (num)
     {
         case 2: words += " Twenty";
+                hasPassedFunc7digits = true;
                 break;
         case 3: words += " Thirty";
+                hasPassedFunc7digits = true;
                 break;
         case 4: words += " Forty";
+                hasPassedFunc7digits = true;
                 break;
         case 5: words += " Fifty";
+                hasPassedFunc7digits = true;
                 break;
         case 6: words += " Sixty";
+                hasPassedFunc7digits = true;
                 break;
         case 7: words += " Seventy";
+                hasPassedFunc7digits = true;
                 break;
         case 8: words += " Eighty";
+                hasPassedFunc7digits = true;
                 break;
         case 9: words += " Ninety";
+                hasPassedFunc7digits = true;
                 break;
-        default: lakh /= 10;
-                pass7 = true;
+        default: lakh %= 100000;
     }
     words += _6digits(lakh); // For the number at lakhs place
     return words;
@@ -421,7 +444,8 @@ string _8digits(long int num)
                 break;
         case 9: words += " Nine";
                 break;
-        default: goto skipcrore;
+        default: if(!hasPassedFunc9digits)
+                { goto skipcrore; }
     }
     words += " Crore";
     if(num != 1 )
@@ -439,45 +463,65 @@ string _9digits(long int num)
     switch (num)
     {
         case 10: words += " Ten";
+                hasPassedFunc9digits = true;
                 break;
         case 11: words += " Eleven";
+                hasPassedFunc9digits = true;
                 break;
         case 12: words += " Twelve";
+                hasPassedFunc9digits = true;
                 break;
         case 13: words += " Thirteen";
+                hasPassedFunc9digits = true;
                 break;
         case 14: words += " Fourteen";
+                hasPassedFunc9digits = true;
                 break;
         case 15: words += " Fifteen";
+                hasPassedFunc9digits = true;
                 break;
         case 16: words += " Sixteen";
+                hasPassedFunc9digits = true;
                 break;
         case 17: words += " Seventeen";
+                hasPassedFunc9digits = true;
                 break;
         case 18: words += " Eighteen";
+                hasPassedFunc9digits = true;
                 break;
+                hasPassedFunc9digits = true;
         case 19: words += " Nineteen";
+                hasPassedFunc9digits = true;
                 break;
         default: num /= 10;
     }
     switch (num)
     {
         case 2: words += " Twenty";
+                hasPassedFunc9digits = true;
                 break;
         case 3: words += " Thirty";
+                hasPassedFunc9digits = true;
                 break;
         case 4: words += " Forty";
+                hasPassedFunc9digits = true;
                 break;
         case 5: words += " Fifty";
+                hasPassedFunc9digits = true;
                 break;
         case 6: words += " Sixty";
+                hasPassedFunc9digits = true;
                 break;
         case 7: words += " Seventy";
+                hasPassedFunc9digits = true;
                 break;
         case 8: words += " Eighty";
+                hasPassedFunc9digits = true;
                 break;
         case 9: words += " Ninety";
+                hasPassedFunc9digits = true;
                 break;
+        default: crores %= 10000000;
     }
     words += _8digits(crores); // For the number at crores place
     return words;
