@@ -224,8 +224,7 @@ string _4digits(int num)
                 break;
         case 9: words += " Nine";
                 break;
-        default: if(!pass5)
-                    goto skipthousand;
+        default: if(!pass5) { goto skipthousand; }
     }
     words += " Thousand";
     if(num != 1)
@@ -273,7 +272,6 @@ string _5digits(long int num)
                 pass5 = true;
                 break;
         default: num /= 10;
-                cout << "Hello 1" << endl;
     }
     switch (num)
     {
@@ -302,7 +300,6 @@ string _5digits(long int num)
                 pass5 = true;
                 break;
         default: thousands %= 1000;
-                cout << "Hello 2" << endl;
     }
     words += _4digits(thousands); // For the number at thousands place
     return words;
@@ -333,8 +330,7 @@ string _6digits(long int num)
                 break;
         case 9: words += " Nine";
                 break;
-        default: if(!pass7)
-                    goto skiplakh;
+        default: if(!pass7) { goto skiplakh; }
     }
     words += " Lakh";
     if(num != 1 )
