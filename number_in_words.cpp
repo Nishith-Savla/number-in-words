@@ -3,6 +3,13 @@
 
 #include <iostream>
 #include <cmath>
+#include <windows.h>
+// HRLINE for drawing a line of the size of the console window
+#define HRLINE \
+    CONSOLE_SCREEN_BUFFER_INFO csbi; \
+    GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi); \
+    int width = csbi.srWindow.Right - csbi.srWindow.Left + 1; \
+    for(int i=1; i<=width; i++) std::cout<< "-"; std::cout << std::endl;
 using namespace std;
 
 // Declaration of functions
@@ -35,11 +42,14 @@ int main()
     }
     words += to_words(num); // Function call
     if(words != "") // Error handling for empty strings
-    cout << num << " in words is:" << words << endl;
+    cout << num << " in words is:" << words << endl << endl;
     cout << "Do you want to try again (y/n): " << flush;
     cin >> wanna_try_again;
     if(wanna_try_again == 'y' || wanna_try_again == 'Y')
+    {
+        HRLINE;
         main();
+    }
     return 0;
 }
 
@@ -234,9 +244,7 @@ string _4digits(int num)
         default: if(!hasPassedFunc5digits || (hasPassedFunc6digits && !hasPassedFunc5digits))
                 { goto skipthousand; }
     }
-    words += " Thousand";
-    if(num != 1)
-        words += "s";
+    words += " Thousand,";
     skipthousand:
     words += _3digits(hundreds); // For the number at hundreds place
     return words;
@@ -359,9 +367,7 @@ string _6digits(long int num)
         default: if(!hasPassedFunc7digits)
                 { goto skiplakh; }
     }
-    words += " Lakh";
-    if(num != 1 )
-        words += "s";
+    words += " Lakh,";
     skiplakh:
     words += _5digits(tths); // For the number at tenthousands place
     return words;
@@ -475,9 +481,7 @@ string _8digits(long int num)
         default: if(!hasPassedFunc9digits && !hasPassedFunc10digits)
                     { goto skipcrore; }
     }
-    words += " Crore";
-    if(num != 1 )
-        words += "s";
+    words += " Crore,";
     skipcrore:
     words += _7digits(tlakhs); // For the number at tenlakhs place
     return words;
