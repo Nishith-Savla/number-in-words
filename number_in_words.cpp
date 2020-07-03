@@ -6,23 +6,24 @@
 using namespace std;
 
 // Declaration of functions
-string to_words(long int);
-string _1digit      (int);
-string _2digits     (int);
-string _3digits     (int);
-string _4digits     (int);
-string _5digits(long int);
-string _6digits(long int);
-string _7digits(long int);
-string _8digits(long int);
-string _9digits(long int);
+string to_words (long long int);
+string _1digit            (int);
+string _2digits           (int);
+string _3digits           (int);
+string _4digits           (int);
+string _5digits      (long int);
+string _6digits      (long int);
+string _7digits      (long int);
+string _8digits      (long int);
+string _9digits      (long int);
+string _10digits(long long int);
 
 // Global declaration of boolean variables to see that if a function is executed or not, excluding default cases
-bool hasPassedFunc5digits = false, hasPassedFunc6digits = false, hasPassedFunc7digits = false, hasPassedFunc9digits = false;
+bool hasPassedFunc5digits = false, hasPassedFunc6digits = false, hasPassedFunc7digits = false, hasPassedFunc9digits = false, hasPassedFunc10digits = false;
 short int error_count = 0;
 int main()
 {
-    long int num;
+    long long int num;
     char wanna_try_again;
     string words = ""; // Target string
     cout << "Enter a number: ";
@@ -42,15 +43,16 @@ int main()
     return 0;
 }
 
-string to_words(long int num)
+string to_words(long long int num)
 {
     int count = 0;
     string words = "";
-    for (long int temp = num; temp > 0; temp/=10) // Counting its length
+    for (long long int temp = num; temp > 0; temp/=10) // Counting its length
         count++;
     switch (count)
     {
         case 0: words += " Zero";
+                break;
         case 1: words += _1digit(num); // If input consists single digit
                 break;
         case 2: words += _2digits(num); // If input consists 2 digits
@@ -68,6 +70,8 @@ string to_words(long int num)
         case 8: words += _8digits(num); // If input consists 8 digits
                 break;
         case 9: words += _9digits(num); // If input consists 9 digits
+                break;
+        case 10: words += _10digits(num); // If input consists 10 digits
                 break;
         default: cout << "The number is too big :( \n";
                 if(error_count < 10)
@@ -372,33 +376,43 @@ string _7digits(long int num)
     {
         case 10: words += " Ten";
                 hasPassedFunc7digits = true;
+                lakh %= 100000;
                 break;
         case 11: words += " Eleven";
                 hasPassedFunc7digits = true;
+                lakh %= 100000;
                 break;
         case 12: words += " Twelve";
                 hasPassedFunc7digits = true;
+                lakh %= 100000;
                 break;
         case 13: words += " Thirteen";
                 hasPassedFunc7digits = true;
+                lakh %= 100000;
                 break;
         case 14: words += " Fourteen";
                 hasPassedFunc7digits = true;
+                lakh %= 100000;
                 break;
         case 15: words += " Fifteen";
                 hasPassedFunc7digits = true;
+                lakh %= 100000;
                 break;
         case 16: words += " Sixteen";
                 hasPassedFunc7digits = true;
+                lakh %= 100000;
                 break;
         case 17: words += " Seventeen";
                 hasPassedFunc7digits = true;
+                lakh %= 100000;
                 break;
         case 18: words += " Eighteen";
                 hasPassedFunc7digits = true;
+                lakh %= 100000;
                 break;
         case 19: words += " Nineteen";
                 hasPassedFunc7digits = true;
+                lakh %= 100000;
                 break;
         default: num /= 10;
     }
@@ -428,7 +442,6 @@ string _7digits(long int num)
         case 9: words += " Ninety";
                 hasPassedFunc7digits = true;
                 break;
-        default: lakh %= 100000;
     }
     words += _6digits(lakh); // For the number at lakhs place
     return words;
@@ -459,8 +472,8 @@ string _8digits(long int num)
                 break;
         case 9: words += " Nine";
                 break;
-        default: if(!hasPassedFunc9digits)
-                { goto skipcrore; }
+        default: if(!hasPassedFunc9digits && !hasPassedFunc10digits)
+                    { goto skipcrore; }
     }
     words += " Crore";
     if(num != 1 )
@@ -542,3 +555,42 @@ string _9digits(long int num)
     return words;
 }
 
+string _10digits(long long int num)
+{
+    string words = "";
+    int tcrores = num % 1000000000;
+    num /= 1000000000;
+    switch (num)
+    {
+        case 1: words += " One";
+                hasPassedFunc10digits = true;
+                break;
+        case 2: words += " Two";
+                hasPassedFunc10digits = true;
+                break;
+        case 3: words += " Three";
+                hasPassedFunc10digits = true;
+                break;
+        case 4: words += " Four";
+                hasPassedFunc10digits = true;
+                break;
+        case 5: words += " Five";
+                hasPassedFunc10digits = true;
+                break;
+        case 6: words += " Six";
+                hasPassedFunc10digits = true;
+                break;
+        case 7: words += " Seven";
+                hasPassedFunc10digits = true;
+                break;
+        case 8: words += " Eight";
+                hasPassedFunc10digits = true;
+                break;
+        case 9: words += " Nine";
+                hasPassedFunc10digits = true;
+                break;
+    }
+    words += " Hundred";
+    words += _9digits(tcrores); // For the number at ten crores place
+    return words;
+}

@@ -2,3 +2,6 @@
 number_in_words.cbp
 number_in_words.layout
 number_in_words.depend
+
+#Save failed file
+number_in_words.cpp.save-failed
