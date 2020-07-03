@@ -19,11 +19,11 @@ string _9digits(long int);
 
 // Global declaration of boolean variables to see that if a function is executed or not, excluding default cases
 bool hasPassedFunc5digits = false, hasPassedFunc6digits = false, hasPassedFunc7digits = false, hasPassedFunc9digits = false;
-short int error = 0;
+short int error_count = 0;
 int main()
 {
     long int num;
-    char try_again;
+    char wanna_try_again;
     string words = ""; // Target string
     cout << "Enter a number: ";
     cin>> num;
@@ -35,9 +35,9 @@ int main()
     words += to_words(num); // Function call
     if(words != "") // Error handling for empty strings
     cout << num << " in words is:" << words << endl;
-    cout << "Do you want to try again (y/n): " << endl;
-    cin >> try_again;
-    if(try_again == 'y' || try_again == 'Y')
+    cout << "Do you want to try again (y/n): " << flush;
+    cin >> wanna_try_again;
+    if(wanna_try_again == 'y' || wanna_try_again == 'Y')
         main();
     return 0;
 }
@@ -50,6 +50,7 @@ string to_words(long int num)
         count++;
     switch (count)
     {
+        case 0: words += " Zero";
         case 1: words += _1digit(num); // If input consists single digit
                 break;
         case 2: words += _2digits(num); // If input consists 2 digits
@@ -69,11 +70,11 @@ string to_words(long int num)
         case 9: words += _9digits(num); // If input consists 9 digits
                 break;
         default: cout << "The number is too big :( \n";
-                if(error < 10)
+                if(error_count < 10)
                 {
                     cout << "Try again...\n\n";
                     main();
-                    error++;
+                    error_count++;
                 }
     }
     return words;
@@ -246,33 +247,43 @@ string _5digits(long int num)
     {
         case 10: words += " Ten";
                 hasPassedFunc5digits = true;
+                thousands %= 10000;
                 break;
         case 11: words += " Eleven";
                 hasPassedFunc5digits = true;
+                thousands %= 1000;
                 break;
         case 12: words += " Twelve";
                 hasPassedFunc5digits = true;
+                thousands %= 1000;
                 break;
         case 13: words += " Thirteen";
                 hasPassedFunc5digits = true;
+                thousands %= 1000;
                 break;
         case 14: words += " Fourteen";
                 hasPassedFunc5digits = true;
+                thousands %= 1000;
                 break;
         case 15: words += " Fifteen";
                 hasPassedFunc5digits = true;
+                thousands %= 1000;
                 break;
         case 16: words += " Sixteen";
                 hasPassedFunc5digits = true;
+                thousands %= 1000;
                 break;
         case 17: words += " Seventeen";
                 hasPassedFunc5digits = true;
+                thousands %= 1000;
                 break;
         case 18: words += " Eighteen";
                 hasPassedFunc5digits = true;
+                thousands %= 1000;
                 break;
         case 19: words += " Nineteen";
                 hasPassedFunc5digits = true;
+                thousands %= 1000;
                 break;
         default: num /= 10;
     }
@@ -302,7 +313,6 @@ string _5digits(long int num)
         case 9: words += " Ninety";
                 hasPassedFunc5digits = true;
                 break;
-        default: thousands %= 1000;
     }
     words += _4digits(thousands); // For the number at thousands place
     return words;
