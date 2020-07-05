@@ -26,13 +26,14 @@ string _9digits      (long int);
 string _10digits(long long int);
 
 // Global declaration of boolean variables to see that if a function is executed or not, excluding default cases
-bool hasPassedFunc5digits = false, hasPassedFunc6digits = false, hasPassedFunc7digits = false, hasPassedFunc9digits = false, hasPassedFunc10digits = false;
+bool hasPassedFunc5digits, hasPassedFunc7digits, hasPassedFunc9digits, hasPassedFunc10digits;
 short int error_count = 0;
 int main()
 {
     long long int num;
     char wanna_try_again;
     string words = ""; // Target string
+    hasPassedFunc5digits = hasPassedFunc7digits = hasPassedFunc9digits = hasPassedFunc10digits = false;
     cout << "Enter a number: ";
     cin>> num;
     if(num < 0)
@@ -241,10 +242,10 @@ string _4digits(int num)
                 break;
         case 9: words += " Nine";
                 break;
-        default: if(!hasPassedFunc5digits || (hasPassedFunc6digits && !hasPassedFunc5digits))
-                { goto skipthousand; }
+        default: if(!hasPassedFunc5digits)
+                    { goto skipthousand; }
     }
-    words += " Thousand,";
+    words += " Thousand";
     skipthousand:
     words += _3digits(hundreds); // For the number at hundreds place
     return words;
@@ -338,36 +339,27 @@ string _6digits(long int num)
     switch (num)
     {
         case 1: words += " One";
-                hasPassedFunc6digits = true;
                 break;
         case 2: words += " Two";
-                hasPassedFunc6digits = true;
                 break;
         case 3: words += " Three";
-                hasPassedFunc6digits = true;
                 break;
         case 4: words += " Four";
-                hasPassedFunc6digits = true;
                 break;
         case 5: words += " Five";
-                hasPassedFunc6digits = true;
                 break;
         case 6: words += " Six";
-                hasPassedFunc6digits = true;
                 break;
         case 7: words += " Seven";
-                hasPassedFunc6digits = true;
                 break;
         case 8: words += " Eight";
-                hasPassedFunc6digits = true;
                 break;
         case 9: words += " Nine";
-                hasPassedFunc6digits = true;
                 break;
         default: if(!hasPassedFunc7digits)
                 { goto skiplakh; }
     }
-    words += " Lakh,";
+    words += " Lakh";
     skiplakh:
     words += _5digits(tths); // For the number at tenthousands place
     return words;
@@ -481,7 +473,7 @@ string _8digits(long int num)
         default: if(!hasPassedFunc9digits && !hasPassedFunc10digits)
                     { goto skipcrore; }
     }
-    words += " Crore,";
+    words += " Crore";
     skipcrore:
     words += _7digits(tlakhs); // For the number at tenlakhs place
     return words;
